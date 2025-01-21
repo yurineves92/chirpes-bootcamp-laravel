@@ -1,0 +1,35 @@
+name: Deploy Chirpers
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, bcmath, intl
+        coverage: none
+
+    - name: Install Composer Dependencies
+      run: composer install --no-dev --optimize-autoloader
+
+    - name: Run Migration
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: mediumturquoise-badger-289395.hostingersite.com
+        DB_PORT: 3306
+        DB_DATABASE: u426134670_chirpers
+        DB_USERNAME: u426134670_chirpers
+        DB_PASSWORD: vi8LV4s77c4&CmB#
+      run: |
+        php artisan migrate --force
