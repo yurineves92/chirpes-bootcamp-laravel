@@ -23,13 +23,22 @@ jobs:
     - name: Install Composer Dependencies
       run: composer install --no-dev --optimize-autoloader
 
+    - name: Upload Files to Hostinger
+      uses: appleboy/scp-action@v0.2.1
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }}
+        username: ${{ secrets.HOSTINGER_USERNAME }}
+        password: ${{ secrets.HOSTINGER_PASSWORD }}
+        source: ./
+        target: ${{ secrets.HOSTINGER_TARGET }}
+
     - name: Run Migration
       env:
         DB_CONNECTION: mysql
-        DB_HOST: 193.203.175.157
-        DB_PORT: 3306
-        DB_DATABASE: u426134670_chirpers
-        DB_USERNAME: u426134670_chirpers
-        DB_PASSWORD: vi8LV4s77c4&CmB#
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         php artisan migrate --force
