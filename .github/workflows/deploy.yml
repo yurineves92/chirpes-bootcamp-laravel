@@ -26,7 +26,7 @@ jobs:
     - name: Run Migration
       env:
         DB_CONNECTION: mysql
-        DB_HOST: mediumturquoise-badger-289395.hostingersite.com
+        DB_HOST: 193.203.175.157
         DB_PORT: 3306
         DB_DATABASE: u426134670_chirpers
         DB_USERNAME: u426134670_chirpers
