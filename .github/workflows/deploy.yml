@@ -24,7 +24,7 @@ jobs:
       run: composer install --no-dev --optimize-autoloader
 
     - name: Upload Files to Hostinger
-      uses: appleboy/scp-action@v0.2.1
+      uses: appleboy/scp-action@v0.1.5
       with:
         host: ${{ secrets.HOSTINGER_HOST }}
         username: ${{ secrets.HOSTINGER_USERNAME }}
